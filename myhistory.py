@@ -2,45 +2,36 @@
 from __future__ import print_function
 import readline
 
-def rhist(p=True, r=False):
-    """fetches command line history. prints if p=true. returns command history if r=true.
-    otherwise, doesn't print and/or doesn't return command history."""
-    history_list = []
+def hist():
+    """Fetches command line history. Returns dict of all lines."""
+    history_dict = {}
     # create history_list
     for i in range(readline.get_current_history_length()):
-        history_list.append(readline.get_history_item(i+1))
-    # print if p==True
-    if (p==True):
-        for i in range(len(history_list)):
-            print(i+1, ":", history_list[i])
-    # return total history list if p==True
-    if (r==True):
-        return history_list
+        history_dict[i+1] = (readline.get_history_item(i+1))
+    return history_dict
 
 def getline(number):
     """returns the line at said number"""
     return readline.get_history_item(number)
 
-def shist(search_string, p=True, r=False):
-    """Searches through the command line history. prints if p=true. returns command history if r=true.
-    otherwise, doesn't print and/or doesn't return command history."""
-    # gets the full list
-    history_list = rhist(r=True, p=False)
-    history_dict = {}
-    for i in range(len(history_list)):
-        history_dict[i+1] = history_list[i]
-    # trims the list down
-    history_list = []
+def shist(search_string):
+    """Searches through the command line history. Returns dict of applicable lines."""
+    # gets the full dict
+    history_dict = hist()
+    # creates the final history dict
+    final_history_dict = {}
     for key in history_dict:
-        if search_string not in history_dict[key]:
-            history_list.append(key)
-    for key in history_list:
-        if key in history_dict:
-            del history_dict[key]
-    # print if p==True
-    if (p==True):
-        for key in history_dict:
-            print(key, ":", history_dict[key])
-    # return partial history list
-    if (r==True):
-        return history_list
+        if search_string in history_dict[key]:
+            final_history_dict[key] = history_dict[key]
+    return final_history_dict
+
+def phist():
+    """Prints the command line history."""
+    history = hist();
+    for line in history:
+        print(line, ":", history[line])
+
+def pshist(search_string):
+    history = shist(search_string)
+    for line in history:
+        print(line, ":", history[line])
