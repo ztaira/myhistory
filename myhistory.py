@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from __future__ import print_function
 import readline
+import os
 
 def hist():
     """Fetches command line history. Returns dict of all lines."""
@@ -38,3 +39,9 @@ def pshist(search_string):
     history = shist(search_string)
     for line in history:
         print(line, ":", history[line])
+
+def copyline(number):
+    """copies the line to your clipboard. Works on OS X."""
+    my_line = getline(number)
+    my_command = "echo '" + my_line + "' | pbcopy"
+    os.system(my_command)
