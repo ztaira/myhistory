@@ -12,16 +12,18 @@ def hist():
 
 def getline(number):
     """returns the line at said number"""
+    number = int(number)
     return readline.get_history_item(number)
 
 def shist(search_string):
     """Searches through the command line history. Returns dict of applicable lines."""
     # gets the full dict
+    my_string = str(search_string)
     history_dict = hist()
     # creates the final history dict
     final_history_dict = {}
     for key in history_dict:
-        if search_string in history_dict[key]:
+        if my_string in history_dict[key]:
             final_history_dict[key] = history_dict[key]
     return final_history_dict
 
