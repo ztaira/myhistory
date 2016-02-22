@@ -34,6 +34,7 @@ def phist():
         print(line, ":", history[line])
 
 def pshist(search_string):
+    """Prints a search of the command line history"""
     history = shist(search_string)
     for line in history:
         print(line, ":", history[line])

@@ -1,6 +1,5 @@
-myhistory is a small wrapper to make using Python's shell better. It currently includes the following functions:
+myhistory is a small grep substitute.
 
-history()              # prints out the history
-getline(number)        # returns the command issued at line "number"
+You can search the shell history. You can print it out. You can do both at once. Cool!
 
-It's not very pretty... yet.
+Works with Python 2.7, and uses the readline module.
